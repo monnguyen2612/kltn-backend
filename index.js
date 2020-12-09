@@ -44,8 +44,10 @@ app.use((req, res) => {
     res.status(404).send('Api Not Found');
 });
 
-var server = app.listen(8081, () => {
-    const host = server.address().address;
-    const port = server.address().port;
-    console.log('Server is running at http://%s:%s', host, port);
-})
+
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+
+app.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
